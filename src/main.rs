@@ -1,3 +1,6 @@
+mod cmd;
+mod util;
+
 fn main() {
-    println!("Hello, world!");
+    cmd::commander().run().unwrap_or_else(|e| e.exit());
 }
