@@ -38,7 +38,8 @@ pub fn install_docker() {
             vec![
                 "-fsSL",
                 "https://get.docker.com",
-                "-o get-docker.sh",
+                "-o",
+                "get-docker.sh",
             ],
         )
             .then(duct::cmd(
@@ -49,4 +50,3 @@ pub fn install_docker() {
             .unwrap();
     }
 }
-
