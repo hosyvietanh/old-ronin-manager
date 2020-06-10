@@ -1,0 +1,30 @@
+[mainchain]
+  # An endpoint that can query ethereum data, i.e. Infura or Alchemy like
+  endpoint = "https://rinkeby.infura.io/v3/1ad8334880b24f58ad8ee6ba6f898181"
+  chain_id = 4
+  block_time = 15
+  safe_block_confirmation = 2
+
+# Address and block number of gateway contract on ethereum
+[mainchain.gateway]
+  starting_block = 6560559
+  address = "287bbcfb6e9765864f880a4ec2c8f5e388511845"
+
+# Address and block number of gateway contract on side chain
+[sidechain]
+  endpoint = "http://node:8545"
+  chain_id = 2021
+  block_time = 3
+  safe_block_confirmation = 2
+
+[sidechain.gateway]
+  starting_block = 1
+  address = "801a43bd2266d056c95942fb39e399e0965ab015"
+
+# Should be compatible with .env file
+[database]
+  url = "postgres://postgres:postgres@oracle-db:5432/oracle"
+
+# Should be same with .env file
+[secret]
+  private_key = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

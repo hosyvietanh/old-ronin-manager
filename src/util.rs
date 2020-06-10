@@ -73,6 +73,7 @@ pub fn install_docker_compose() {
                     "/usr/bin/docker-compose"
                 ],
             ))
-            .run().unwrap();
+            .run()
+            .unwrap();
     }
 }

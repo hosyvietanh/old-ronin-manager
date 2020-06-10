@@ -1,0 +1,42 @@
+version: "3"
+services:
+  node:
+    image: andyaxie/testnet:latest
+    hostname: node
+    container_name: node
+    ports:
+      - 8545:8545
+    volumes:
+      - chaindata:/root
+    environment:
+      - PASSWORD=${PASSWORD}
+      - PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
+      - BOOTNODES=${BOOTNODE}
+      - NETWORK_ID=${NETWORK_ID}
+  oracle-db:
+    image: postgres:latest
+    hostname: oracle-db
+    container_name: oracle-db
+    ports:
+      - 15432:5432
+    volumes:
+      - oracledata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+  oracle:
+    image: andyaxie/oracle:latest
+    hostname: oracle
+    container_name: oracle
+    depends_on:
+      - node
+      - oracle-db
+    volumes:
+      - ./oracle-config:/opt/config
+    environment:
+      - DEPLOYMENT=${DEPLOYMENT}
+
+volumes:
+  chaindata:
+  oracledata:
