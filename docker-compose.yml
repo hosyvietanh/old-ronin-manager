@@ -11,7 +11,7 @@ services:
     environment:
       - PASSWORD=${PASSWORD}
       - PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
-      - BOOTNODES=${BOOTNODE}
+      - BOOTNODES=${BOOTNODES}
       - NETWORK_ID=${NETWORK_ID}
   oracle-db:
     image: postgres:latest

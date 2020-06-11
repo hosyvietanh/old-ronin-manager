@@ -1,4 +1,6 @@
 mod install;
+mod start;
+mod stop;
 
 use clap::Arg;
 use clap_nested::Commander;
@@ -18,6 +20,8 @@ pub fn commander<'a>() -> Commander<'a, (), str> {
         })
         .args(|_args, matches| matches.value_of("environment").unwrap_or("dev"))
         .add_cmd(install::cmd())
+        .add_cmd(start::cmd())
+        .add_cmd(stop::cmd())
         .no_cmd(|_args, _matches| {
             println!("No subcommand matched");
             Ok(())
