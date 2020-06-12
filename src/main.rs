@@ -20,13 +20,15 @@ fn set_working_dir() -> Result<(), Box<dyn Error>> {
 
     let dir_name = path.file_name().unwrap();
 
-    // In case of cargo run
+    // In case of cargo run, jump to grand parent dir
     if check_config(&path).is_err() && (dir_name.eq("debug") || dir_name.eq("release")) {
         path.pop();
         path.pop();
     }
 
-    check_config(&path)
+    check_config(&path)?;
+    std::env::set_current_dir(path)?;
+    Ok(())
 }
 
 fn check_config(path: &PathBuf) -> Result<(), Box<dyn Error>> {
@@ -47,8 +49,7 @@ fn check_config(path: &PathBuf) -> Result<(), Box<dyn Error>> {
     }
     if !has_docker_compose_file {
         Err("docker-compose.yml file is not available".into())
-    }
-    else if !has_env_file {
+    } else if !has_env_file {
         Err(".env file is not available".into())
     } else if !has_config_dir{
         Err("config directory is not available".into())
