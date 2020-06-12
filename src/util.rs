@@ -1,6 +1,6 @@
+use colored::Colorize;
 use std::ffi::OsStr;
 use std::fmt;
-use colored::Colorize;
 use which::which;
 
 pub fn command_exists<C: AsRef<OsStr>>(cmd: C) -> bool {
@@ -35,19 +35,11 @@ pub fn install_docker() {
 
         duct::cmd(
             "curl",
-            vec![
-                "-fsSL",
-                "https://get.docker.com",
-                "-o",
-                "get-docker.sh",
-            ],
+            vec!["-fsSL", "https://get.docker.com", "-o", "get-docker.sh"],
         )
-            .then(duct::cmd(
-                "sh",
-                vec!["get-docker.sh"],
-            ))
-            .run()
-            .unwrap();
+        .then(duct::cmd("sh", vec!["get-docker.sh"]))
+        .run()
+        .unwrap();
     }
 }
 
@@ -65,15 +57,34 @@ pub fn install_docker_compose() {
                 "/usr/bin/docker-compose",
             ],
         )
-            .then(duct::cmd(
-                "sudo",
-                vec![
-                    "chmod",
-                    "+x",
-                    "/usr/bin/docker-compose"
-                ],
-            ))
-            .run()
-            .unwrap();
+        .then(duct::cmd(
+            "sudo",
+            vec!["chmod", "+x", "/usr/bin/docker-compose"],
+        ))
+        .run()
+        .unwrap();
+    }
+}
+
+pub fn try_add_user_to_docker_group() {
+    if duct::cmd("docker", vec!["ps"])
+        .stdout_null()
+        .stderr_null()
+        .run()
+        .is_err()
+    {
+        println!("{}", "Adding user to docker group".yellow());
+        duct::cmd(
+            "sudo",
+            vec!["usermod", "-aG", "docker", &std::env::var("USER").unwrap()],
+        )
+        .run()
+        .unwrap();
+
+        println!(
+            "{}. {}",
+            "User added to docker group".green(),
+            "Please log out and log back in to take effect".yellow(),
+        )
     }
 }

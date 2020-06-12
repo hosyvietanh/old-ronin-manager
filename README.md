@@ -8,7 +8,7 @@ Usage:
 cp config/[test|main].env .env
 ```
 * Then open `.env` file and file in remaining variables
-* Start services
+* Start services. You might need to log out and log back in after install.
 ```shell script
 ./node-manager install
 ./node-manager start

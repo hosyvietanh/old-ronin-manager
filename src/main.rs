@@ -1,13 +1,16 @@
 mod cmd;
 mod util;
 
+use std::error::Error;
 use std::fs::{self};
 use std::path::PathBuf;
-use std::error::Error;
 
 fn main() {
     if let Err(e) = set_working_dir() {
-        println!("Error happened: {}. Please read instruction in README.md", e);
+        println!(
+            "Error happened: {}. Please read instruction in README.md",
+            e
+        );
         return;
     }
     cmd::commander().run();
@@ -51,7 +54,7 @@ fn check_config(path: &PathBuf) -> Result<(), Box<dyn Error>> {
         Err("docker-compose.yml file is not available".into())
     } else if !has_env_file {
         Err(".env file is not available".into())
-    } else if !has_config_dir{
+    } else if !has_config_dir {
         Err("config directory is not available".into())
     } else {
         Ok(())
