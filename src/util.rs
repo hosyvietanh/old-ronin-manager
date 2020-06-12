@@ -66,20 +66,28 @@ pub fn install_docker_compose() {
     }
 }
 
-pub fn try_add_user_to_docker_group() {
+pub fn make_docker_runable() {
     if duct::cmd("docker", vec!["ps"])
         .stdout_null()
         .stderr_null()
         .run()
         .is_err()
     {
+        println!("Starting docker services ...");
+        duct::cmd(
+            "sudo",
+            vec!["service", "docker", "start"],
+        )
+            .run()
+            .unwrap();
+
         println!("{}", "Adding user to docker group".yellow());
         duct::cmd(
             "sudo",
             vec!["usermod", "-aG", "docker", &std::env::var("USER").unwrap()],
         )
-        .run()
-        .unwrap();
+            .run()
+            .unwrap();
 
         println!(
             "{}. {}",

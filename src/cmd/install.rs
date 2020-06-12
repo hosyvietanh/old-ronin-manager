@@ -7,7 +7,7 @@ pub fn cmd<'a>() -> Command<'a, ()> {
         .runner(|_env, _matches| {
             util::install_docker();
             util::install_docker_compose();
-            util::try_add_user_to_docker_group();
+            util::make_docker_runable();
             Ok(())
         })
 }
