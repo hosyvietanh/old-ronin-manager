@@ -1,0 +1,22 @@
+[mainchain]
+  # An endpoint that can query ethereum data, i.e. Infura or Alchemy like
+  endpoint = ""
+  chain_id = 1
+  block_time = 15
+  safe_block_confirmation = 7
+
+# Address and block number of gateway contract on ethereum
+[mainchain.gateway]
+  starting_block = 0
+  address = ""
+
+# Address and block number of gateway contract on side chain
+[sidechain]
+  endpoint = "http://node:8545"
+  chain_id = 2020
+  block_time = 3
+  safe_block_confirmation = 2
+
+[sidechain.gateway]
+  starting_block = 0
+  address = ""

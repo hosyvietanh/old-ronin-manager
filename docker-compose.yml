@@ -35,10 +35,11 @@ services:
       - node
       - oracle-db
     volumes:
-      - ./oracle-config:/opt/config
+      - ./config:/opt/config
     environment:
       - DEPLOYMENT=${DEPLOYMENT}
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@oracle-db:5432/${POSTGRES_DB}
+      - ORACLE_DATABASE__URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@oracle-db:5432/${POSTGRES_DB}
+      - ORACLE_SECRET__PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
 
 volumes:
   chaindata:

@@ -1,6 +1,6 @@
 [mainchain]
   # An endpoint that can query ethereum data, i.e. Infura or Alchemy like
-  endpoint = "https://rinkeby.infura.io/v3/1ad8334880b24f58ad8ee6ba6f898181"
+  endpoint = ""
   chain_id = 4
   block_time = 15
   safe_block_confirmation = 2
@@ -20,11 +20,3 @@
 [sidechain.gateway]
   starting_block = 1
   address = "801a43bd2266d056c95942fb39e399e0965ab015"
-
-# Should be compatible with .env file
-[database]
-  url = "postgres://postgres:postgres@oracle-db:5432/oracle"
-
-# Should be same with .env file
-[secret]
-  private_key = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
