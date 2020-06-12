@@ -6,7 +6,10 @@ use std::path::PathBuf;
 use std::error::Error;
 
 fn main() {
-    set_working_dir().unwrap();
+    if let Err(e) = set_working_dir() {
+        println!("Error happened: {}. Please read instruction in README.md", e);
+        return;
+    }
     cmd::commander().run();
 }
 
@@ -27,10 +30,14 @@ fn set_working_dir() -> Result<(), Box<dyn Error>> {
 }
 
 fn check_config(path: &PathBuf) -> Result<(), Box<dyn Error>> {
+    let mut has_docker_compose_file = false;
     let mut has_env_file = false;
     let mut has_config_dir = false;
     for entry in fs::read_dir(path)? {
         let entry = entry?;
+        if entry.path().is_file() && entry.file_name().eq("docker-compose.yml") {
+            has_docker_compose_file = true;
+        }
         if entry.path().is_file() && entry.file_name().eq(".env") {
             has_env_file = true;
         }
@@ -38,7 +45,10 @@ fn check_config(path: &PathBuf) -> Result<(), Box<dyn Error>> {
             has_config_dir = true;
         }
     }
-    if !has_env_file {
+    if !has_docker_compose_file {
+        Err("docker-compose.yml file is not available".into())
+    }
+    else if !has_env_file {
         Err(".env file is not available".into())
     } else if !has_config_dir{
         Err("config directory is not available".into())
