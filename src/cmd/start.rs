@@ -8,9 +8,16 @@ pub fn cmd<'a>() -> Command<'a, ()> {
             duct::cmd(
                 "docker-compose",
                 vec![
-                    "up",
-                    "-d",
-                ],
+                    "pull"
+                ]
+            ).then(
+                duct::cmd(
+                    "docker-compose",
+                    vec![
+                        "up",
+                        "-d",
+                    ],
+                )
             )
                 .run()
                 .unwrap();

@@ -13,3 +13,13 @@ cp config/[test|main].env .env
 ./node-manager install
 ./node-manager start
 ```
+
+* To stop all services
+```shell script
+./node-maanger stop
+```
+* To stop and clean all data, including chain data and oracle data. 
+Note this action is irreversible
+```shell script
+./node-maanger wipe
+```
