@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 clap = "2.33.0"
-clap-nested = "0.3.1"
+clap-nested = "0.4.0"
 colored = "1.8.0"
 duct = "0.12.0"
 which = "2.0.1"
