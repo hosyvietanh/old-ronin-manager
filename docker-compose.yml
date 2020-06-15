@@ -7,8 +7,10 @@ services:
     ports:
       - 8545:8545
       - 8546:8546
+      - 30303:30303
+      - 30303:30303/udp
     volumes:
-      - chaindata:/root
+      - chaindata:/ethereum
     environment:
       - PASSWORD=${PASSWORD}
       - PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
