@@ -2,6 +2,7 @@ version: "3"
 services:
   node:
     image: andyaxie/testnet:latest
+    restart: always
     hostname: node
     container_name: node
     ports:
@@ -18,6 +19,7 @@ services:
       - NETWORK_ID=${NETWORK_ID}
   oracle-db:
     image: postgres:latest
+    restart: always
     hostname: oracle-db
     container_name: oracle-db
     ports:
@@ -31,6 +33,7 @@ services:
 
   oracle:
     image: andyaxie/oracle:latest
+    restart: always
     hostname: oracle
     container_name: oracle
     depends_on:
