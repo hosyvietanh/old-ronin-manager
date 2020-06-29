@@ -7,6 +7,13 @@ use clap_nested::Commander;
 
 pub fn commander<'a>() -> Commander<'a, (), ()> {
     Commander::new()
+        .options(|app| {
+            app
+                .name(clap::crate_name!())
+                .version(clap::crate_version!())
+                .about(clap::crate_description!())
+                .author(clap::crate_authors!())
+        })
         .add_cmd(install::cmd())
         .add_cmd(start::cmd())
         .add_cmd(stop::cmd())
