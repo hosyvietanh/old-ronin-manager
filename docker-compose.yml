@@ -11,12 +11,24 @@ services:
       - 30303:30303
       - 30303:30303/udp
     volumes:
-      - chaindata:/ethereum
+      - ~/.skymavis/chaindata:/ethereum
     environment:
       - PASSWORD=${PASSWORD}
       - PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
       - BOOTNODES=${BOOTNODES}
       - NETWORK_ID=${NETWORK_ID}
+  chain-stats:
+    image: andyaxie/chain-stats-backend:latest
+    restart: always
+    hostname: chain-stats
+    container_name: chain-stats-backend
+    depends_on:
+      - node
+    environment:
+      - RPC_HOST=node
+      - INSTANCE_NAME=${INSTANCE_NAME}
+      - WS_SERVER=${CHAIN_STATS_WS_SERVER}
+      - WS_SECRET=${CHAIN_STATS_WS_SECRET}
   oracle-db:
     image: postgres:latest
     restart: always
@@ -25,21 +37,11 @@ services:
     ports:
       - 54321:5432
     volumes:
-      - oracledata:/var/lib/postgresql/data
+      - ~/.skymavis/oracledata:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-  chain-stats:
-    image: andyaxie/chain-stats-backend:latest
-    restart: always
-    hostname: chain-stats
-    container_name: chain-stats-backend
-    environment:
-      - RPC_HOST=node
-      - INSTANCE_NAME=${INSTANCE_NAME}
-      - WS_SERVER=${CHAIN_STATS_WS_SERVER}
-      - WS_SECRET=${CHAIN_STATS_WS_SECRET}
   oracle:
     image: andyaxie/oracle:latest
     restart: always
@@ -55,7 +57,3 @@ services:
       - ORACLE_DATABASE__URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@oracle-db:5432/${POSTGRES_DB}
       - ORACLE_SECRET__PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
       - ORACLE_MAINCHAIN__ENDPOINT=${ETHEREUM_ENDPOINT}
-
-volumes:
-  chaindata:
-  oracledata:

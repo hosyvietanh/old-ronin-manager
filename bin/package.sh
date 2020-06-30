@@ -19,13 +19,14 @@ for ((i = 0; i < ${#platforms[@]}; ++i)); do
   echo "Building..."
   cross build --release --target=$target
   echo "Creating tar file..."
-  mkdir pkg-node-manager
-  cp target/${target}/release/node-manager pkg-node-manager/
-  cp docker-compose.yml pkg-node-manager/
-  cp -r config pkg-node-manager/
-  cp README.md pkg-node-manager/
-  tar czf pkg-$platform-$version.tar.gz pkg-node-manager
-  rm -rf pkg-node-manager
+  pkg_dir="pkg-node-manager-${version}"
+  mkdir ${pkg_dir}
+  cp target/${target}/release/node-manager ${pkg_dir}/
+  cp docker-compose.yml ${pkg_dir}/
+  cp -r config ${pkg_dir}/
+  cp README.md ${pkg_dir}/
+  tar czf pkg-$platform-$version.tar.gz ${pkg_dir}
+  rm -rf ${pkg_dir}
   echo "Done packaging for $platform"
   echo ""
 done
