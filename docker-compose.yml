@@ -30,7 +30,16 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-
+  chain-stats:
+    image: andyaxie/chain-stats-backend:latest
+    restart: always
+    hostname: chain-stats
+    container_name: chain-stats-backend
+    environment:
+      - RPC_HOST=node
+      - INSTANCE_NAME=${INSTANCE_NAME}
+      - WS_SERVER=${CHAIN_STATS_WS_SERVER}
+      - WS_SECRET=${CHAIN_STATS_WS_SECRET}
   oracle:
     image: andyaxie/oracle:latest
     restart: always
