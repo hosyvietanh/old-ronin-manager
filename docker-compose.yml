@@ -11,24 +11,13 @@ services:
       - 30303:30303
       - 30303:30303/udp
     volumes:
-      - ~/.skymavis/chaindata:/ethereum
+      - ~/.skymavis/chaindata:/ronin
     environment:
       - PASSWORD=${PASSWORD}
       - PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
       - BOOTNODES=${BOOTNODES}
       - NETWORK_ID=${NETWORK_ID}
-  chain-stats:
-    image: andyaxie/chain-stats-backend:latest
-    restart: always
-    hostname: chain-stats
-    container_name: chain-stats-backend
-    depends_on:
-      - node
-    environment:
-      - RPC_HOST=node
-      - INSTANCE_NAME=${INSTANCE_NAME}
-      - WS_SERVER=${CHAIN_STATS_WS_SERVER}
-      - WS_SECRET=${CHAIN_STATS_WS_SECRET}
+      - ETHSTATS_ENDPOINT=${INSTANCE_NAME}:${CHAIN_STATS_WS_SECRET}@${CHAIN_STATS_WS_SERVER}:443
   oracle-db:
     image: postgres:latest
     restart: always
@@ -57,3 +46,4 @@ services:
       - ORACLE_DATABASE__URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@oracle-db:5432/${POSTGRES_DB}
       - ORACLE_SECRET__PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
       - ORACLE_MAINCHAIN__ENDPOINT=${ETHEREUM_ENDPOINT}
+      - RUST_LOG=info
