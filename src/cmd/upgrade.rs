@@ -36,10 +36,10 @@ pub fn cmd<'a>() -> Command<'a, ()> {
 pub fn verify_latest_version() -> (bool, String) {
     let current_version = clap::crate_version!();
     println!("Current version = {}", current_version);
-    let latest_version = reqwest::blocking::get("https://chain.skymavis.one/ronin-latest-version")
-        .unwrap()
-        .text()
-        .unwrap();
+    let latest_version = duct::cmd("curl", vec!["https://chain.skymavis.one/ronin-latest-version"])
+            .stdout_capture()
+            .read()
+            .unwrap();
 
     println!("Latest version = {}", latest_version);
     if current_version == latest_version {
