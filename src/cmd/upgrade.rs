@@ -17,7 +17,7 @@ pub fn cmd<'a>() -> Command<'a, ()> {
                 // Go to home directory
                 std::env::set_current_dir(Path::new(&std::env::var("HOME").unwrap())).unwrap();
                 download_latest_version();
-                let new_path = format!("{}/pkg-node-manager-{}", &std::env::var("HOME").unwrap(), latest_version);
+                let new_path = format!("{}/pkg-ronin-manager-{}", &std::env::var("HOME").unwrap(), latest_version);
                 let new_dir = Path::new(&new_path);
 
                 copy_current_config(old_dir, new_dir);
@@ -61,14 +61,14 @@ pub fn download_latest_version() {
         "-s",
         "-L",
         "-O",
-        "https://chain.skymavis.one/downloads/node-manager-linux-latest.tar.gz",
+        "https://chain.skymavis.one/downloads/ronin-manager-linux-latest.tar.gz",
     ])
         .then(duct::cmd("tar", vec![
             "fx",
-            "node-manager-linux-latest.tar.gz",
+            "ronin-manager-linux-latest.tar.gz"
         ]))
         .then(duct::cmd("rm", vec![
-            "node-manager-linux-latest.tar.gz"
+            "ronin-manager-linux-latest.tar.gz"
         ]))
         .run()
         .unwrap();

@@ -19,9 +19,9 @@ for ((i = 0; i < ${#platforms[@]}; ++i)); do
   echo "Building..."
   cross build --release --target=$target
   echo "Creating tar file..."
-  pkg_dir="pkg-node-manager-${version}"
+  pkg_dir="pkg-ronin-manager-${version}"
   mkdir ${pkg_dir}
-  cp target/${target}/release/node-manager ${pkg_dir}/
+  cp target/${target}/release/ronin-manager ${pkg_dir}/
   cp docker-compose.yml ${pkg_dir}/
   cp -r config ${pkg_dir}/
   cp README.md ${pkg_dir}/
