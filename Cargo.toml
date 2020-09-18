@@ -1,5 +1,5 @@
 [package]
-name = "node-manager"
+name = "ronin-manager"
 version = "0.5.0"
 authors = ["Sky Mavis Engineering <engineering@skymavis.com>"]
 edition = "2018"
