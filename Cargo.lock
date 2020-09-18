@@ -163,17 +163,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "node-manager"
-version = "0.5.0"
-dependencies = [
- "clap",
- "clap-nested",
- "colored",
- "duct",
- "which",
-]
-
-[[package]]
 name = "object"
 version = "0.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -187,6 +176,17 @@ checksum = "81e8dfa4c69d7bde595e9a940fcf1d7f60966d3fce8a8c4cad67c60e35ea2a11"
 dependencies = [
  "nix",
  "winapi",
+]
+
+[[package]]
+name = "ronin-manager"
+version = "0.5.0"
+dependencies = [
+ "clap",
+ "clap-nested",
+ "colored",
+ "duct",
+ "which",
 ]
 
 [[package]]
