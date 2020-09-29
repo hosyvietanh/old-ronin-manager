@@ -12,6 +12,7 @@ targets=(x86_64-unknown-linux-musl x86_64-apple-darwin)
 set -e
 
 version=$(grep ^version Cargo.toml | head -n 1 | sed -e 's/^version = "//' -e 's/"$//')
+commit_hash=$(git rev-parse HEAD | cut -c 1-6)
 for ((i = 0; i < ${#platforms[@]}; ++i)); do
   platform=${platforms[i]}
   target=${targets[i]}
@@ -25,7 +26,7 @@ for ((i = 0; i < ${#platforms[@]}; ++i)); do
   cp docker-compose.yml ${pkg_dir}/
   cp -r config ${pkg_dir}/
   cp README.md ${pkg_dir}/
-  tar czf pkg-$platform-$version.tar.gz ${pkg_dir}
+  tar czf pkg-$platform-v$version-$commit_hash.tar.gz ${pkg_dir}
   rm -rf ${pkg_dir}
   echo "Done packaging for $platform"
   echo ""

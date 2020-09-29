@@ -1,7 +1,7 @@
 version: "3"
 services:
   node:
-    image: andyaxie/testnet:v2.0.0
+    image: andyaxie/testnet:v2.0.0-80128e
     restart: always
     hostname: node
     container_name: node
@@ -32,7 +32,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
   oracle:
-    image: andyaxie/oracle:v0.2.0
+    image: andyaxie/oracle:v0.2.0-a25ad1
     restart: always
     hostname: oracle
     container_name: oracle
