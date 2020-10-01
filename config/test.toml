@@ -5,7 +5,7 @@
   block_time = 15
   safe_block_confirmation = 2
   gateway_starting_block = 8793413
-  registry = "EB4Ae0dcd47e700B95c070f658D6a273B4Ca3038"
+  registry = "eb4ae0dcd47e700b95c070f658d6a273b4ca3038"
 
 # Address and block number of gateway contract on side chain
 [sidechain]
@@ -14,7 +14,7 @@
   block_time = 3
   safe_block_confirmation = 2
   gateway_starting_block = 26476
-  registry = "EB4Ae0dcd47e700B95c070f658D6a273B4Ca3038"
+  registry = "eb4ae0dcd47e700b95c070f658d6a273b4ca3038"
 
 [expired_time_secs]
   done_task = 2592000
