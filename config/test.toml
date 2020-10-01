@@ -3,20 +3,19 @@
   endpoint = ""
   chain_id = 3
   block_time = 15
-  safe_block_confirmation = 4
-
-# Address and block number of gateway contract on ethereum
-[mainchain.gateway]
-  starting_block = 8192477
-  address = "8068a2c7735060589ab03685e220b322b5ec9a71"
+  safe_block_confirmation = 2
+  gateway_starting_block = 0
+  registry = ""
 
 # Address and block number of gateway contract on side chain
 [sidechain]
-  endpoint = "http://node:8545"
+  endpoint = ""
   chain_id = 2021
   block_time = 3
   safe_block_confirmation = 2
+  gateway_starting_block = 0
+  registry = ""
 
-[sidechain.gateway]
-  starting_block = 1
-  address = "aab5926f280bf1e7630fe6fdbb1e74655db0f978"
+[expired_time_secs]
+  done_task = 2592000
+  failed_task = 7776000
