@@ -1,7 +1,7 @@
 mod install;
 mod start;
 mod stop;
-mod update;
+mod pull;
 mod upgrade;
 mod wipe;
 
@@ -19,7 +19,7 @@ pub fn commander<'a>() -> Commander<'a, (), ()> {
         .add_cmd(install::cmd())
         .add_cmd(start::cmd())
         .add_cmd(stop::cmd())
-        .add_cmd(update::cmd())
+        .add_cmd(pull::cmd())
         .add_cmd(upgrade::cmd())
         .add_cmd(wipe::cmd())
         .no_cmd(|_args, _matches| {
