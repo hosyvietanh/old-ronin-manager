@@ -1,6 +1,6 @@
 [package]
 name = "ronin-manager"
-version = "0.5.0"
+version = "0.5.2"
 authors = ["Sky Mavis Engineering <engineering@skymavis.com>"]
 edition = "2018"
 
