@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::path::Path;
 
 use clap_nested::Command;
@@ -15,7 +16,7 @@ pub fn cmd<'a>() -> Command<'a, ()> {
                 let old_dir = current_path.as_path();
 
                 // Go to home directory
-                std::env::set_current_dir(Path::new(&std::env::var("HOME").unwrap())).unwrap();
+                std::env::set_current_dir(Path::new(&std::env::var("PWD").unwrap()).parent().unwrap()).unwrap();
                 download_latest_version();
                 let new_path = format!("{}/pkg-ronin-manager-{}", &std::env::var("HOME").unwrap(), latest_version);
                 let new_dir = Path::new(&new_path);
@@ -38,7 +39,7 @@ pub fn verify_latest_version() -> (bool, String) {
     println!("Current version = {}", current_version);
     let latest_version = duct::cmd("curl", vec![
         "-s",
-        "https://chain.skymavis.one/ronin-latest-version"
+        "https://tesnet.skymavis.one/ronin-latest-version"
     ])
         .stdout_capture()
         .read()
@@ -61,7 +62,7 @@ pub fn download_latest_version() {
         "-s",
         "-L",
         "-O",
-        "https://chain.skymavis.one/downloads/ronin-manager-linux-latest.tar.gz",
+        "https://testnet.skymavis.one/downloads/ronin-manager-linux-latest.tar.gz",
     ])
         .then(duct::cmd("tar", vec![
             "fx",
