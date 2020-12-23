@@ -1,6 +1,7 @@
+min_kept_tasks = 1000
+
 [mainchain]
   # An endpoint that can query ethereum data, i.e. Infura or Alchemy like
-  endpoint = ""
   chain_id = 1
   block_time = 15
   safe_block_confirmation = 7
@@ -9,7 +10,6 @@
 
 # Address and block number of gateway contract on side chain
 [sidechain]
-  endpoint = ""
   chain_id = 2020
   block_time = 3
   safe_block_confirmation = 2

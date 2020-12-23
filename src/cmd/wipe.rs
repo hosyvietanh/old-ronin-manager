@@ -4,7 +4,7 @@ use duct;
 
 pub fn cmd<'a>() -> Command<'a, ()> {
     Command::new("wipe")
-        .description("Stop all services and clean all block chain and oracle data")
+        .description("Stop all services and clean all block chain and bridge data")
         .runner(|_env, _matches| {
             duct::cmd("docker-compose", vec!["down", "-v"])
                 .then(

@@ -18,7 +18,7 @@ cp config/[test|main].env .env
 ```shell script
 ./ronin-manager stop
 ```
-* To stop and clean all data, including chain data and oracle data. 
+* To stop and clean all data, including chain data and bridge data.
 Note this action is irreversible
 ```shell script
 ./ronin-manager wipe
