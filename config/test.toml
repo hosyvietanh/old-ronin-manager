@@ -1,19 +1,19 @@
+min_kept_tasks = 1000
+
 [mainchain]
   # An endpoint that can query ethereum data, i.e. Infura or Alchemy like
-  endpoint = ""
   chain_id = 3
   block_time = 15
-  safe_block_confirmation = 2
-  gateway_starting_block = 8793413
-  registry = "eb4ae0dcd47e700b95c070f658d6a273b4ca3038"
+  safe_block_confirmation = 3
+  gateway_starting_block = 9310333
+  registry = "eac63cffe9d6677633bef9905b70e9e53b9ee28c"
 
 # Address and block number of gateway contract on side chain
 [sidechain]
-  endpoint = ""
   chain_id = 2021
   block_time = 3
   safe_block_confirmation = 2
-  gateway_starting_block = 26476
+  gateway_starting_block = 28001
   registry = "eb4ae0dcd47e700b95c070f658d6a273b4ca3038"
 
 [expired_time_secs]

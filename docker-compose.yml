@@ -19,20 +19,20 @@ services:
       - NETWORK_ID=${NETWORK_ID}
       - ETHSTATS_ENDPOINT=${INSTANCE_NAME}:${CHAIN_STATS_WS_SECRET}@${CHAIN_STATS_WS_SERVER}:443
   bridge-db:
-    image: postgres:13
+    image: postgres:13.1
     restart: always
-    hostname: oracle-db
-    container_name: oracle-db
+    hostname: bridge-db
+    container_name: bridge-db
     ports:
       - 127.0.0.1:54321:5432
     volumes:
-      - ~/.skymavis/oracledata:/var/lib/postgresql/data
+      - ~/.skymavis/bridgedata:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
   bridge:
-    image: axieinfinity/bridge:v0.2.0-641eee7
+    image: axieinfinity/bridge:v0.2.0-6530b9b
     restart: always
     hostname: bridge
     container_name: bridge
