@@ -1,7 +1,7 @@
 version: "3"
 services:
   node:
-    image: axieinfinity/ronin-testnet:v2.1.0-7ff6b15
+    image: axieinfinity/ronin-mainnet:v2.1.0-74cc66b
     restart: always
     hostname: node
     container_name: node
@@ -32,7 +32,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
   bridge:
-    image: axieinfinity/bridge:v0.2.0-6530b9b
+    image: axieinfinity/bridge:v0.2.0-1bef829
     restart: always
     hostname: bridge
     container_name: bridge
