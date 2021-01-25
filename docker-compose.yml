@@ -1,7 +1,7 @@
 version: "3"
 services:
   node:
-    image: andyaxie/testnet:v2.0.0-80128e
+    image: axieinfinity/ronin-mainnet:v2.1.0-74cc66b
     restart: always
     hostname: node
     container_name: node
@@ -18,33 +18,33 @@ services:
       - BOOTNODES=${BOOTNODES}
       - NETWORK_ID=${NETWORK_ID}
       - ETHSTATS_ENDPOINT=${INSTANCE_NAME}:${CHAIN_STATS_WS_SECRET}@${CHAIN_STATS_WS_SERVER}:443
-  oracle-db:
-    image: postgres:latest
+  bridge-db:
+    image: postgres:13.1
     restart: always
-    hostname: oracle-db
-    container_name: oracle-db
+    hostname: bridge-db
+    container_name: bridge-db
     ports:
       - 127.0.0.1:54321:5432
     volumes:
-      - ~/.skymavis/oracledata:/var/lib/postgresql/data
+      - ~/.skymavis/bridgedata:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-  oracle:
-    image: andyaxie/oracle:v0.2.0-a25ad1
+  bridge:
+    image: axieinfinity/bridge:v0.2.0-1bef829
     restart: always
-    hostname: oracle
-    container_name: oracle
+    hostname: bridge
+    container_name: bridge
     depends_on:
       - node
-      - oracle-db
+      - bridge-db
     volumes:
       - ./config:/opt/config
     environment:
       - DEPLOYMENT=${DEPLOYMENT}
-      - ORACLE_DATABASE__URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@oracle-db:5432/${POSTGRES_DB}
-      - ORACLE_SECRET__PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
-      - ORACLE_MAINCHAIN__ENDPOINT=${ETHEREUM_ENDPOINT}
-      - ORACLE_SIDECHAIN__ENDPOINT=http://node:8545
+      - BRIDGE_DATABASE__URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@bridge-db:5432/${POSTGRES_DB}
+      - BRIDGE_SECRET__PRIVATE_KEY=${VALIDATOR_PRIVATE_KEY}
+      - BRIDGE_MAINCHAIN__ENDPOINT=${ETHEREUM_ENDPOINT}
+      - BRIDGE_SIDECHAIN__ENDPOINT=http://node:8545
       - RUST_LOG=info
